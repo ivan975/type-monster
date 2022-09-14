@@ -26,12 +26,14 @@ const typeController = (e) => {
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
+    if (userText !== questionText) {
+      errorCount++;
+    }
     return display.removeChild(display.lastChild);
   }
 
   // these are the valid character we are allowing to type
-  const validLetters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^&*()_+-={}[]'\".,?";
+  const validLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^&*()_+-={}[]'\".,?";
 
   // if it is not a valid character like Control/Alt then skip displaying anything
   if (!validLetters.includes(newLetter)) {
@@ -39,7 +41,6 @@ const typeController = (e) => {
   }
 
   userText += newLetter;
-
   const newLetterCorrect = validate(newLetter);
 
   if (newLetterCorrect) {
@@ -67,8 +68,7 @@ const gameOver = () => {
   // the current time is the finish time
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
-  const timeTaken = (finishTime - startTime) / 1000;
-
+  const timeTaken = Math.round((finishTime - startTime) / 1000);
   // show result modal
   resultModal.innerHTML = "";
   resultModal.classList.toggle("hidden");
