@@ -62,9 +62,9 @@ body {
   display: none;
 }
 #result {
-  position: absolute;
-  top: 10%;
-  left: 10%;
+  position: relative;
+  left: 50%;
+  bottom: 450px;
   transform: translate(-50%, -50%);
   height: 250px;
   width: 400px;
